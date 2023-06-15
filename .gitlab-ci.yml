@@ -35,16 +35,29 @@ Validate Terraform:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(main|production)$/ || $CI_COMMIT_BRANCH =~ /^(main|production)$/'
 
 Build and Push:
+  image: docker:24.0.2
+  services:
+    - docker:24.0.2-dind
   stage: Build and Push
   script:
-    - echo "Build and Push docker image"
+    - apk add python3
+    - pip3 install awscli
+    - docker build --compress -t $ECR_REPO:$CI_COMMIT_SHORT_SHA .
+    - $(aws ecr get-login --no-include-email --region us-east-1)
+    - docker push $ECR_REPO:$CI_COMMIT_SHORT_SHA
+    - docker tag $ECR_REPO:CI_COMMIT_SHORT_SHA $ECR_REPO:latest
+    - docker push $ECR_REPO:latest
   rules:
     - if: '$CI_COMMIT_BRANCH =~ /^(main|production)$/'
 
 Staging Plan:
   stage: Staging Plan
   script:
-    - echo "Run Terraform Plan for Staging"
+    - cd deploy/
+    - export TF_VAR_ecr_image_api=$ECR_REPO:$CI_COMMIT_SHORT_SHA
+    - terraform init
+    - terraform workspace select staging || terraform workspace new staging
+    - terraform plan
   rules:
     - if: '$CI_COMMIT_BRANCH =~ /^(main|production)$/'
 
@@ -58,7 +71,10 @@ Staging Apply:
 Production Plan:
   stage: Production Plan
   script:
-    - echo "Run Terraform Plan for Production"
+    - cd deploy/
+    - export TF_VAR_ecr_image_api=$ECR_REPO:$CI_COMMIT_SHORT_SHA
+    - terraform workspace select production || terraform workspace new production
+    - terraform plan
   rules:
     - if: '$CI_COMMIT_BRANCH == "production"'
 
