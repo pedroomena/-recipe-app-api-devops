@@ -9,8 +9,7 @@ services:
     volumes:
       - ./app:/app
     command: >
-      sh -c "python manage.py wait_for_db &&
-             python manage.py migrate &&
+      sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db
@@ -19,7 +18,8 @@ services:
       - DB_PASS=supersecretpassword
       - DEBUG=1
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: postgres:10-alpine
@@ -27,3 +27,6 @@ services:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=supersecretpassword
+    healthcheck:
+      test: "pg_isready -U postgres"
+      interval: 5s
