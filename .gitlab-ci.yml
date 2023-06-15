@@ -40,7 +40,7 @@ Build and Push:
     - docker:24.0.2-dind
   stage: Build and Push
   script:
-    - apk add python3
+    - apk add python3 && apk add py3-pip
     - pip3 install awscli
     - docker build --compress -t $ECR_REPO:$CI_COMMIT_SHORT_SHA .
     - $(aws ecr get-login --no-include-email --region us-east-1)
