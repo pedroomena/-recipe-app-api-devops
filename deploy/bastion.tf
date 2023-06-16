@@ -12,7 +12,7 @@ resource "aws_instance" "bastion" {
   instance_type = "t2.micro"
 
   tags = merge(
-    local.commom_tags,
+    local.common_tags,
     map("Name", "${local.prefix}-bastion")
   )
 }
