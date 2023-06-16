@@ -15,10 +15,12 @@ provider "aws" {
 
 locals {
   prefix = "${var.prefix}-${terraform.workspace}"
-  commom_tags = {
+  common_tags = {
     Environment = terraform.workspace
     Project     = var.project
     Owner       = var.contact
     ManagedBy   = "Terraform"
   }
 }
+
+data "aws_region" "current" {}
