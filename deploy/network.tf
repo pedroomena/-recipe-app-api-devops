@@ -29,7 +29,7 @@ resource "aws_subnet" "public_a" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}j-public-a")
+    map("Name", "${local.prefix}-public-a")
   )
 }
 
@@ -38,7 +38,7 @@ resource "aws_route_table" "public_a" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}j-public-a")
+    map("Name", "${local.prefix}-public-a")
   )
 }
 
