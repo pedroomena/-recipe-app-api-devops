@@ -1,7 +1,7 @@
 resource "aws_ecs_cluster" "main" {
-    name = "${local.prefix}-cluster"
+  name = "${local.prefix}-cluster"
 
-    tags = local.common_tags
+  tags = local.common_tags
 }
 
 resource "aws_iam_policy" "task_execution_role_policy" {
