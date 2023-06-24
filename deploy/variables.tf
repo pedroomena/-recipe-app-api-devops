@@ -25,12 +25,12 @@ variable "bastion_key_name" {
 
 variable "ecr_image_api" {
   description = "ECR Image for API"
-  default = "366507419979.dkr.ecr.us-east-1.amazonaws.com/recipe-app-api-devops:latest"
+  default     = "366507419979.dkr.ecr.us-east-1.amazonaws.com/recipe-app-api-devops:latest"
 }
 
 variable "ecr_image_proxy" {
   description = "ECR Image for Proxy"
-  default = "366507419979.dkr.ecr.us-east-1.amazonaws.com/recipe-app-api-proxy:latest"
+  default     = "366507419979.dkr.ecr.us-east-1.amazonaws.com/recipe-app-api-proxy:latest"
 }
 
 variable "django_secret_key" {
