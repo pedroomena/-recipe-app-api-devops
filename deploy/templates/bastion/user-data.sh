@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo yum update -y
-sudo amazon-linux-extras install -y docker
-sudo systemctl enable docker.service
-sudo systemctl start docker.service
-sudo usermod -aG docker ec2-user
+yum update -y
+yum install -y docker
+systemctl enable docker.service
+systemctl start docker.service
+usermod -aG docker ec2-user
