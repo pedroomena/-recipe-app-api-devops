@@ -23,6 +23,7 @@ resource "aws_security_group" "rds" {
 
     security_groups = [
       aws_security_group.bastion.id,
+      aws_security_group.ecs_service.id,
     ]
   }
 
