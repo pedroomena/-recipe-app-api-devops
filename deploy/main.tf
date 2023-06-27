@@ -1,4 +1,10 @@
 terraform {
+  required_providers {
+    aws = {
+      version = "~>5.5.0"
+    }
+  }
+
   backend "s3" {
     bucket         = "recipe-app-devops-tfstate"
     key            = "recipe-app.tfstate"
@@ -9,8 +15,7 @@ terraform {
 }
 
 provider "aws" {
-  region  = "us-east-1"
-  version = "~>2.54.0"
+  region = "us-east-1"
 }
 
 locals {

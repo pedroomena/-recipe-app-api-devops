@@ -1,4 +1,9 @@
-version: "3.7"
+version: "3.8"
+
+#
+# Created to test app <> proxy comms
+# Intended to use after building the proxy image from recipe-app-api-proxy project
+#
 
 services:
   app:

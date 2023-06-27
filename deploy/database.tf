@@ -7,7 +7,7 @@ resource "aws_db_subnet_group" "main" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-main")
+    { "Name" = "${local.prefix}-main" }
   )
 }
 
@@ -32,7 +32,7 @@ resource "aws_security_group" "rds" {
 
 resource "aws_db_instance" "main" {
   identifier              = "${local.prefix}-db"
-  name                    = "recipe"
+  db_name                 = "recipe"
   allocated_storage       = 20
   storage_type            = "gp2"
   engine                  = "postgres"
@@ -48,6 +48,6 @@ resource "aws_db_instance" "main" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-main")
+    { "Name" = "${local.prefix}-main" }
   )
 }

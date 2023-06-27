@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-vpc")
+    { "Name" = "${local.prefix}-vpc" }
   )
 }
 
@@ -14,7 +14,7 @@ resource "aws_internet_gateway" "main" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-main")
+    { "Name" = "${local.prefix}-main" }
   )
 }
 
@@ -29,7 +29,7 @@ resource "aws_subnet" "public_a" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-public-a")
+    { "Name" = "${local.prefix}-public-a" }
   )
 }
 
@@ -38,7 +38,7 @@ resource "aws_route_table" "public_a" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-public-a")
+    { "Name" = "${local.prefix}-public-a" }
   )
 }
 
@@ -54,11 +54,11 @@ resource "aws_route" "public_internet_access_a" {
 }
 
 resource "aws_eip" "public_a" {
-  vpc = true
+  domain = "vpc"
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-public-a")
+    { "Name" = "${local.prefix}-public-a" }
   )
 }
 
@@ -68,7 +68,7 @@ resource "aws_nat_gateway" "public_a" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-public-a")
+    { "Name" = "${local.prefix}-public-a" }
   )
 }
 
@@ -80,7 +80,7 @@ resource "aws_subnet" "public_b" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-public-b")
+    { "Name" = "${local.prefix}-public-b" }
   )
 }
 
@@ -89,7 +89,7 @@ resource "aws_route_table" "public_b" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-public-b")
+    { "Name" = "${local.prefix}-public-b" }
   )
 }
 
@@ -105,11 +105,11 @@ resource "aws_route" "public_internet_access_b" {
 }
 
 resource "aws_eip" "public_b" {
-  vpc = true
+  domain = "vpc"
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-public-b")
+    { "Name" = "${local.prefix}-public-b" }
   )
 }
 
@@ -119,7 +119,7 @@ resource "aws_nat_gateway" "public_b" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-public-b")
+    { "Name" = "${local.prefix}-public-b" }
   )
 }
 
@@ -134,7 +134,7 @@ resource "aws_subnet" "private_a" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-private-a")
+    { "Name" = "${local.prefix}-private-a" }
   )
 }
 
@@ -143,7 +143,7 @@ resource "aws_route_table" "private_a" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-private-a")
+    { "Name" = "${local.prefix}-private-a" }
   )
 }
 
@@ -165,7 +165,7 @@ resource "aws_subnet" "private_b" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-private-b")
+    { "Name" = "${local.prefix}-private-b" }
   )
 }
 
@@ -174,7 +174,7 @@ resource "aws_route_table" "private_b" {
 
   tags = merge(
     local.common_tags,
-    map("Name", "${local.prefix}-private-b")
+    { "Name" = "${local.prefix}-private-b" }
   )
 }
 
