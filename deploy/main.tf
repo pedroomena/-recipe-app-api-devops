@@ -30,6 +30,7 @@ locals {
     production = var.prefix
     staging    = "${var.prefix}.staging"
     dev        = "${var.prefix}.dev"
+    default    = "${var.prefix}.dev"
   }
 }
 
