@@ -36,3 +36,7 @@ variable "ecr_image_proxy" {
 variable "django_secret_key" {
   description = "Secret key for Django app"
 }
+
+variable "dns_zone_name" {
+  description = "Domain name"
+}
