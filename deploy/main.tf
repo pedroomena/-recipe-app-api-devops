@@ -26,6 +26,11 @@ locals {
     Owner       = var.contact
     ManagedBy   = "Terraform"
   }
+  subdomain = {
+    production = var.prefix
+    staging    = "${var.prefix}.staging"
+    dev        = "${var.prefix}.dev"
+  }
 }
 
 data "aws_region" "current" {}
